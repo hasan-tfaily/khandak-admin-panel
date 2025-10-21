@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "infographs",
+  "info": {
+    "singularName": "infograph",
+    "pluralName": "infographs",
+    "displayName": "infograph"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "infographCard": {
+      "type": "component",
+      "component": "infograph-card.infograph-card",
+      "repeatable": true
+    }
+  }
+}

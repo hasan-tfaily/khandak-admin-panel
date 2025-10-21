@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_infograpic_infograpics",
+  "info": {
+    "displayName": "infograpic",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "infographs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::infograph.infograph"
+    }
+  },
+  "config": {}
+}

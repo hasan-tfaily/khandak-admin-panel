@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_infograph_card_infograph_cards",
+  "info": {
+    "displayName": "infograph Card",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

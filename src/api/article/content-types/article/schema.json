@@ -62,6 +62,9 @@
       "relation": "manyToOne",
       "target": "api::edition.edition",
       "inversedBy": "articles"
+    },
+    "content": {
+      "type": "richtext"
     }
   }
 }

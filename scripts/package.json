@@ -7,7 +7,9 @@
     "setup": "node setup-env.js",
     "test": "node test-migration.js",
     "migrate": "node migrate-to-strapi.js",
-    "dev": "LOG_LEVEL=debug node migrate-to-strapi.js"
+    "migrate-local": "node migrate-local.js",
+    "dev": "LOG_LEVEL=debug node migrate-to-strapi.js",
+    "dev-local": "LOG_LEVEL=debug node migrate-local.js"
   },
   "dependencies": {
     "node-fetch": "^2.6.7",

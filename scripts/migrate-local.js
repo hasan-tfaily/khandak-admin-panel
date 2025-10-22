@@ -1,32 +1,27 @@
 #!/usr/bin/env node
 
 /**
- * Strapi Migration Script
- * Migrates data from MySQL dump to Strapi CMS
- *
- * Usage: node scripts/migrate-to-strapi.js
+ * Local Migration Script
+ * Runs migration from local machine to remote Strapi server
  */
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
 const SQLParser = require("./sql-parser");
 
-// Try to load server config, fallback to local config
-let CONFIG;
-try {
-  const serverConfig = require("./server-config");
-  CONFIG = serverConfig;
-} catch (error) {
-  // Fallback to local development config
-  CONFIG = {
-    sqlFile: path.join(__dirname, "../data/khandaq_2025-10-22_162307.sql"),
-    uploadsDir: path.join(__dirname, "../data/uploads"),
-    strapiUploadsDir: path.join(__dirname, "../public/uploads"),
-    batchSize: 50,
-    logLevel: "info",
-  };
-}
+// Local configuration - runs from your machine
+const CONFIG = {
+  // Local file paths
+  sqlFile: path.join(__dirname, "../data/khandaq_2025-10-22_162307.sql"),
+  uploadsDir: path.join(__dirname, "../data/uploads"),
+  
+  // Remote Strapi server
+  strapiUrl: process.env.STRAPI_URL || "http://your-server-ip:1337", // Update this
+  apiToken: process.env.STRAPI_API_TOKEN,
+  
+  batchSize: 50,
+  logLevel: "info",
+};
 
 // Logging utility
 const log = {
@@ -36,13 +31,11 @@ const log = {
   error: (msg) => console.error(`[ERROR] ${msg}`),
 };
 
-// SQL Parser is now imported from separate file
-
 // Strapi API Client
 class StrapiClient {
   constructor() {
-    this.baseUrl = process.env.STRAPI_URL || "http://localhost:1337";
-    this.apiToken = process.env.STRAPI_API_TOKEN;
+    this.baseUrl = CONFIG.strapiUrl;
+    this.apiToken = CONFIG.apiToken;
   }
 
   async createEntry(contentType, data) {
@@ -69,6 +62,7 @@ class StrapiClient {
 
   async uploadFile(filePath, alt = "") {
     try {
+      const FormData = require('form-data');
       const formData = new FormData();
       const file = fs.createReadStream(filePath);
       formData.append("files", file);
@@ -78,6 +72,7 @@ class StrapiClient {
         method: "POST",
         headers: {
           ...(this.apiToken && { Authorization: `Bearer ${this.apiToken}` }),
+          ...formData.getHeaders(),
         },
         body: formData,
       });
@@ -107,7 +102,6 @@ class DataMapper {
 
     for (const authorRow of authorsData) {
       try {
-        // Based on the SQL structure: id, name, image, about, created_at, updated_at
         const [id, name, image, about, createdAt, updatedAt] = authorRow;
 
         const authorData = {
@@ -121,15 +115,10 @@ class DataMapper {
           const imagePath = path.join(CONFIG.uploadsDir, image);
           if (fs.existsSync(imagePath)) {
             try {
-              const uploadResult = await this.strapi.uploadFile(
-                imagePath,
-                name
-              );
+              const uploadResult = await this.strapi.uploadFile(imagePath, name);
               authorData.avatar = uploadResult[0].id;
             } catch (error) {
-              log.warn(
-                `Failed to upload author image for ${name}: ${error.message}`
-              );
+              log.warn(`Failed to upload author image for ${name}: ${error.message}`);
             }
           } else {
             log.warn(`Author image not found: ${imagePath}`);
@@ -153,9 +142,7 @@ class DataMapper {
 
     for (const categoryRow of categoriesData) {
       try {
-        // Based on the SQL structure: id, name, icon, created_at, updated_at, order, slug, description
-        const [id, name, icon, createdAt, updatedAt, order, slug, description] =
-          categoryRow;
+        const [id, name, icon, createdAt, updatedAt, order, slug, description] = categoryRow;
 
         const categoryData = {
           name: name || "Unnamed Category",
@@ -164,17 +151,12 @@ class DataMapper {
           publishedAt: new Date().toISOString(),
         };
 
-        const result = await this.strapi.createEntry(
-          "categories",
-          categoryData
-        );
+        const result = await this.strapi.createEntry("categories", categoryData);
         this.categoryMap.set(parseInt(id), result.data.id);
 
         log.debug(`Created category: ${name} (ID: ${result.data.id})`);
       } catch (error) {
-        log.error(
-          `Failed to migrate category ${categoryRow[1]}: ${error.message}`
-        );
+        log.error(`Failed to migrate category ${categoryRow[1]}: ${error.message}`);
       }
     }
 
@@ -186,20 +168,7 @@ class DataMapper {
 
     for (const postRow of postsData) {
       try {
-        // Based on the SQL structure: id, title, description, content, image, author_id, category_id, created_at, updated_at, slug, edition_id
-        const [
-          id,
-          title,
-          description,
-          content,
-          image,
-          authorId,
-          categoryId,
-          createdAt,
-          updatedAt,
-          slug,
-          editionId,
-        ] = postRow;
+        const [id, title, description, content, image, authorId, categoryId, createdAt, updatedAt, slug, editionId] = postRow;
 
         const articleData = {
           title: title || "Untitled Article",
@@ -224,15 +193,10 @@ class DataMapper {
           const imagePath = path.join(CONFIG.uploadsDir, image);
           if (fs.existsSync(imagePath)) {
             try {
-              const uploadResult = await this.strapi.uploadFile(
-                imagePath,
-                title
-              );
+              const uploadResult = await this.strapi.uploadFile(imagePath, title);
               articleData.cover = uploadResult[0].id;
             } catch (error) {
-              log.warn(
-                `Failed to upload cover image for ${title}: ${error.message}`
-              );
+              log.warn(`Failed to upload cover image for ${title}: ${error.message}`);
             }
           } else {
             log.warn(`Article image not found: ${imagePath}`);
@@ -263,7 +227,7 @@ class DataMapper {
 // Main migration function
 async function runMigration() {
   try {
-    log.info("Starting Strapi migration...");
+    log.info("Starting local migration to remote Strapi...");
 
     // Check if SQL file exists
     if (!fs.existsSync(CONFIG.sqlFile)) {
@@ -278,11 +242,6 @@ async function runMigration() {
     // Initialize Strapi client
     const strapiClient = new StrapiClient();
     const mapper = new DataMapper(strapiClient);
-
-    // Create uploads directory if it doesn't exist
-    if (!fs.existsSync(CONFIG.strapiUploadsDir)) {
-      fs.mkdirSync(CONFIG.strapiUploadsDir, { recursive: true });
-    }
 
     // Migrate data in order
     if (tables.authors && tables.authors.data.length > 0) {
@@ -309,4 +268,4 @@ if (require.main === module) {
   runMigration();
 }
 
-module.exports = { runMigration, SQLParser, StrapiClient, DataMapper };
+module.exports = { runMigration, StrapiClient, DataMapper };

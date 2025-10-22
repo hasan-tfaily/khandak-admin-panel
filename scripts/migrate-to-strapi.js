@@ -10,7 +10,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
-const SQLParser = require("./sql-parser");
+const SQLParser = require("./simple-sql-parser");
 
 // Try to load server config, fallback to local config
 let CONFIG;

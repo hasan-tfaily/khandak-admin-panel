@@ -36,6 +36,9 @@
     },
     "title": {
       "type": "string"
+    },
+    "bio": {
+      "type": "text"
     }
   }
 }

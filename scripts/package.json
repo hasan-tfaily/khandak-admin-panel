@@ -1,0 +1,22 @@
+{
+  "name": "strapi-migration-scripts",
+  "version": "1.0.0",
+  "description": "Migration scripts for importing data into Strapi CMS",
+  "main": "migrate-to-strapi.js",
+  "scripts": {
+    "setup": "node setup-env.js",
+    "test": "node test-migration.js",
+    "migrate": "node migrate-to-strapi.js",
+    "dev": "LOG_LEVEL=debug node migrate-to-strapi.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "form-data": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -63,8 +63,11 @@
       "target": "api::edition.edition",
       "inversedBy": "articles"
     },
-    "content": {
-      "type": "richtext"
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "articles"
     }
   }
 }

@@ -34,7 +34,7 @@
       "target": "api::article.article",
       "mappedBy": "author"
     },
-    "title": {
+    "jobTitle": {
       "type": "string"
     },
     "bio": {

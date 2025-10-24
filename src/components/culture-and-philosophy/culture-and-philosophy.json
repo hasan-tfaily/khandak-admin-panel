@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_culture_and_philosophy_culture_and_philosophy_s",
+  "info": {
+    "displayName": "culture and philosophy ",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "cultures": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "philosophies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  },
+  "config": {}
+}

@@ -690,6 +690,15 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cultureAndPhilosophy: Schema.Attribute.Component<
+      'culture-and-philosophy.culture-and-philosophy',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     infograph2: Schema.Attribute.Component<'infograpic.infograpic', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -702,11 +711,26 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
+    localandinternationalaffairs: Schema.Attribute.Component<
+      'localandinternationalaffairs.local-and-international-affairs',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::homepage.homepage'
     >;
+    opinion: Schema.Attribute.Component<'opinion.opinion', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

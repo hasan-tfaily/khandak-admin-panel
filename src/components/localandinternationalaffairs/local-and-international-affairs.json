@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_localandinternationalaffairs_local_and_international_affairs",
+  "info": {
+    "displayName": "local and international affairs",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "local": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "internations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  },
+  "config": {}
+}

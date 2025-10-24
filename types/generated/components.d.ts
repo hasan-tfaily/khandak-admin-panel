@@ -11,6 +11,22 @@ export interface BannerBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface CultureAndPhilosophyCultureAndPhilosophy
+  extends Struct.ComponentSchema {
+  collectionName: 'components_culture_and_philosophy_culture_and_philosophy_s';
+  info: {
+    displayName: 'culture and philosophy ';
+    icon: 'bulletList';
+  };
+  attributes: {
+    cultures: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    philosophies: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::article.article'
+    >;
+  };
+}
+
 export interface InfographCardInfographCard extends Struct.ComponentSchema {
   collectionName: 'components_infograph_card_infograph_cards';
   info: {
@@ -34,6 +50,34 @@ export interface InfograpicInfograpic extends Struct.ComponentSchema {
       'oneToMany',
       'api::infograph.infograph'
     >;
+  };
+}
+
+export interface LocalandinternationalaffairsLocalAndInternationalAffairs
+  extends Struct.ComponentSchema {
+  collectionName: 'components_localandinternationalaffairs_local_and_international_affairs';
+  info: {
+    displayName: 'local and international affairs';
+    icon: 'bulletList';
+  };
+  attributes: {
+    internations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::article.article'
+    >;
+    local: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+  };
+}
+
+export interface OpinionOpinion extends Struct.ComponentSchema {
+  collectionName: 'components_opinion_opinions';
+  info: {
+    displayName: 'opinion';
+    icon: 'bulletList';
+  };
+  attributes: {
+    israelis: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    opinions: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
   };
 }
 
@@ -116,8 +160,11 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'banner.banner': BannerBanner;
+      'culture-and-philosophy.culture-and-philosophy': CultureAndPhilosophyCultureAndPhilosophy;
       'infograph-card.infograph-card': InfographCardInfographCard;
       'infograpic.infograpic': InfograpicInfograpic;
+      'localandinternationalaffairs.local-and-international-affairs': LocalandinternationalaffairsLocalAndInternationalAffairs;
+      'opinion.opinion': OpinionOpinion;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

@@ -54,6 +54,36 @@
       },
       "component": "infograpic.infograpic",
       "repeatable": false
+    },
+    "localandinternationalaffairs": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "localandinternationalaffairs.local-and-international-affairs",
+      "repeatable": false
+    },
+    "opinion": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "opinion.opinion",
+      "repeatable": false
+    },
+    "cultureAndPhilosophy": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "culture-and-philosophy.culture-and-philosophy",
+      "repeatable": false
     }
   }
 }

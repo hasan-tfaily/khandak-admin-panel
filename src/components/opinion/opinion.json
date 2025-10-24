@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_opinion_opinions",
+  "info": {
+    "displayName": "opinion",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "opinions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "israelis": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  },
+  "config": {}
+}

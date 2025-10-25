@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AfricaAndSportAfricaAndSport extends Struct.ComponentSchema {
+  collectionName: 'components_africa_and_sport_africa_and_sports';
+  info: {
+    displayName: 'africa and sport';
+    icon: 'bulletList';
+  };
+  attributes: {
+    africas: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    sports: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+  };
+}
+
 export interface BannerBanner extends Struct.ComponentSchema {
   collectionName: 'components_banner_banners';
   info: {
@@ -159,6 +171,7 @@ export interface VideoVideo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'africa-and-sport.africa-and-sport': AfricaAndSportAfricaAndSport;
       'banner.banner': BannerBanner;
       'culture-and-philosophy.culture-and-philosophy': CultureAndPhilosophyCultureAndPhilosophy;
       'infograph-card.infograph-card': InfographCardInfographCard;

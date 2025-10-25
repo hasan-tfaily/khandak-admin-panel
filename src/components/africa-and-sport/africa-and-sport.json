@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_africa_and_sport_africa_and_sports",
+  "info": {
+    "displayName": "africa and sport",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "africas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    },
+    "sports": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  },
+  "config": {}
+}

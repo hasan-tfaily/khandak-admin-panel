@@ -681,6 +681,15 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     };
   };
   attributes: {
+    africaAndSport: Schema.Attribute.Component<
+      'africa-and-sport.africa-and-sport',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     banner: Schema.Attribute.Component<'banner.banner', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

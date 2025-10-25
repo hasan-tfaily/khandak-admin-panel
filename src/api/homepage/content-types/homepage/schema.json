@@ -84,6 +84,16 @@
       },
       "component": "culture-and-philosophy.culture-and-philosophy",
       "repeatable": false
+    },
+    "africaAndSport": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "africa-and-sport.africa-and-sport",
+      "repeatable": false
     }
   }
 }

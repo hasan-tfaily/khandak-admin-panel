@@ -33,6 +33,14 @@
       "relation": "oneToMany",
       "target": "api::article.article",
       "mappedBy": "edition"
+    },
+    "pdf": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
     }
   }
 }

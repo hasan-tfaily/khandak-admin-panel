@@ -569,6 +569,7 @@ export interface ApiEditionEdition extends Struct.CollectionTypeSchema {
     number: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    pdf: Schema.Attribute.Media<'files'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

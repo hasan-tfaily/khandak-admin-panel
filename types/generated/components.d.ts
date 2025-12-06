@@ -12,6 +12,18 @@ export interface AfricaAndSportAfricaAndSport extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleContentArticleContent extends Struct.ComponentSchema {
+  collectionName: 'components_article_content_article_contents';
+  info: {
+    displayName: 'articleContent';
+    icon: 'bulletList';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    paragraph: Schema.Attribute.RichText;
+  };
+}
+
 export interface BannerBanner extends Struct.ComponentSchema {
   collectionName: 'components_banner_banners';
   info: {
@@ -172,6 +184,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'africa-and-sport.africa-and-sport': AfricaAndSportAfricaAndSport;
+      'article-content.article-content': ArticleContentArticleContent;
       'banner.banner': BannerBanner;
       'culture-and-philosophy.culture-and-philosophy': CultureAndPhilosophyCultureAndPhilosophy;
       'infograph-card.infograph-card': InfographCardInfographCard;

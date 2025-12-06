@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_article_content_article_contents",
+  "info": {
+    "displayName": "articleContent",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "paragraph": {
+      "type": "richtext"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

@@ -71,6 +71,11 @@
     },
     "content": {
       "type": "richtext"
+    },
+    "articleContent": {
+      "type": "component",
+      "component": "article-content.article-content",
+      "repeatable": true
     }
   }
 }

@@ -21,6 +21,7 @@ export interface ArticleContentArticleContent extends Struct.ComponentSchema {
   attributes: {
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     paragraph: Schema.Attribute.RichText;
+    quote: Schema.Attribute.String;
   };
 }
 

@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "text"
+      "type": "string",
+      "required": true
     },
     "coverImage": {
       "type": "media",

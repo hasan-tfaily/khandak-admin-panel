@@ -23,11 +23,6 @@
         "videos",
         "audios"
       ]
-    },
-    "infographCard": {
-      "type": "component",
-      "component": "infograph-card.infograph-card",
-      "repeatable": true
     }
   }
 }

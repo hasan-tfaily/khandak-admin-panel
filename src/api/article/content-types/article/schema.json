@@ -55,7 +55,7 @@
       ]
     },
     "datePublished": {
-      "type": "string"
+      "type": "date"
     },
     "edition": {
       "type": "relation",

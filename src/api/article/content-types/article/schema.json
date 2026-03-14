@@ -54,6 +54,9 @@
         "shared.slider"
       ]
     },
+    "publishedDate": {
+      "type": "date"
+    },
     "edition": {
       "type": "relation",
       "relation": "manyToOne",
